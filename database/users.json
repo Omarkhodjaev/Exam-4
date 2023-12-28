@@ -1,0 +1,34 @@
+[
+    {
+        "id": "admin",
+        "phone": 111111111,
+        "password": "admin",
+        "full_name": "Admin",
+        "role": "admin"
+    },
+    {
+        "id": "be5e88b7-6345-43d4-9511-15e44edc0f0c",
+        "phone": 910130324,
+        "password": "$2b$10$x5qHizWyhCdoC9Lwv3.ZDevpvQuKg/tCvNt/s0ROACR1pWZMNaMle",
+        "full_name": "Test"
+    },
+    {
+        "id": "fab0b306-466c-4269-9b7b-c1726459949f",
+        "phone": 910130324,
+        "password": "$2b$10$.I0iSlLG62tVbVt0LHlzSu2UUbhIbmeDVDVAkguwXCbeAhbEN40Fq",
+        "full_name": "Test"
+    },
+    {
+        "id": "d811b4d2-f429-49a4-8803-64d2f0490a3b",
+        "phone": 777777777,
+        "password": "$2b$10$tPqm0TYAqt8l059vZHwnb.LxTrnyHMCQL/BP7qaSQlwZ45X5xHLTq",
+        "full_name": "Test"
+    },
+    {
+        "id": "9648d7de-7de1-4430-9675-78cfa553350c",
+        "phone": 910130324,
+        "password": "$2b$10$9cBns9gIz9VbEoWw5Vyt.OAhN7BtaPmiIfu618hyVgtYg/R0iHcOW",
+        "full_name": "Test",
+        "role": "user"
+    }
+]
