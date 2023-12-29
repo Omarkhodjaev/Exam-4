@@ -6,7 +6,7 @@ const {
   UserNotFound,
   UserPhoneAlreadyExists,
   LoginOrPassWrongException,
-} = require("./exception/user.exception");
+} = require("./exception/user.exception.js");
 const uuid = require("uuid");
 const { hashed, isValid } = require("../../library/bycript.js");
 const { jwtSign } = require("../../library/jwt.js");

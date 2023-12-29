@@ -1,15 +1,9 @@
 [
     {
-        "id": "uuid",
-        "parth": "image url",
-        "mimetype": "crevtrvt4vb",
-        "original_name": "nomi",
-        "size": 100
-    },
-    {
-        "id": "3351ae7e-b6ec-468e-b3e2-932f75cc10a3",
-        "path": "http://localhost:3000/media-1703861445818-493647625.jpg",
+        "id": "c0ddd974-014c-47cd-9e9c-3fe0158740ba",
+        "path": "http://localhost:3000/media-1703862720503-848455779.jpg",
         "mime_type": "image/jpeg",
-        "size": 4048433
+        "original_name": "amr-taha-SMMqej67qjI-unsplash.jpg",
+        "size": 2255454
     }
 ]
