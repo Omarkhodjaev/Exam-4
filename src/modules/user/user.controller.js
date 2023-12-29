@@ -30,6 +30,24 @@ class UserController {
     }
   }
 
+  async registerForAdmin(req, res) {
+    try {
+      const dto = req.body;
+
+      const validated = userScheme.validate(dto);
+
+      if (validated.error) {
+        throw new UserBadRequestException(validated.error.message);
+      }
+
+      const resData = await this.#userService.registerForAdmin(dto);
+      res.status(resData.statusCode).json(resData);
+    } catch (error) {
+      const resData = new ResData(error.message, error.statusCode || 500);
+      res.status(resData.statusCode).json(resData);
+    }
+  }
+
   async getAllUsers(req, res) {
     const resData = await this.#userService.getAllUsers();
     return res.status(resData.statusCode).json(resData);
@@ -89,6 +107,7 @@ class UserController {
       res.status(resData.statusCode).json(resData);
     }
   }
+
 }
 
 module.exports = { UserController };

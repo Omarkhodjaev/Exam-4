@@ -6,7 +6,7 @@ const { UserNotFound } = require("./exception/user.exception");
 const uuid = require("uuid");
 const { hashed, isValid } = require("../../library/bycript.js");
 const { jwtSign } = require("../../library/jwt.js");
-
+const {userFindById} = require("../../library/userFoundById.js");
 
 
 class UserService {
@@ -26,8 +26,7 @@ class UserService {
       generatedId,
       dto.phone,
       hashedPassword,
-      dto.fullName,
-      dto.birthdate,
+      dto.fullName
     );
 
 
@@ -44,6 +43,40 @@ class UserService {
     return resData;
   }
 
+  async registerForAdmin(dto) {
+  
+    const userPath = path.join(__dirname, "../../../database", "users.json");
+    const usersDataSource = new DataSource(userPath);
+    const users = usersDataSource.read();
+
+
+    const hashedPassword = await hashed(dto.password);
+
+    const generatedId = uuid.v4();
+
+    const newUser = new User(
+      generatedId,
+      dto.phone,
+      hashedPassword,
+      dto.fullName,
+      "admin",
+    );+
+
+
+    users.push(newUser);
+    usersDataSource.write(users);
+
+    const newToken = jwtSign(newUser.id);
+
+    const resData = new ResData("Successfully registered", 201, {
+      user: newUser,
+      token: newToken,
+    });
+
+    return resData;
+  }
+
+
   getAllUsers() {
     const userPath = path.join(__dirname, "../../../database", "users.json");
     const userDataSource = new DataSource(userPath);
@@ -55,17 +88,13 @@ class UserService {
 
   getUserById(userId) {
 
-    const userPath = path.join(__dirname, "../../../database", "users.json");
-    const userDataSource = new DataSource(userPath);
-    const users = userDataSource.read();
+    const foundUserById = userFindById(userId)
 
-    const user = users.find((user) => user.id === userId);
-
-    if (!user) {
+    if (!foundUserById) {
       throw new UserNotFound();
     }
 
-    const resData = new ResData("User is taken by ID", 200, user, userId);
+    const resData = new ResData("User is taken by ID", 200, foundUserById, userId);
     return resData;
   }
 
