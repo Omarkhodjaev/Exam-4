@@ -6,9 +6,17 @@ class UserBadRequestException extends Error {
   }
 }
 
+class UserPhoneAlreadyExists extends Error {
+  constructor() {
+    super("User phone already exist");
+
+    this.statusCode = 409;
+  }
+}
+
 class LoginOrPassWrongException extends Error {
   constructor() {
-    super("login or password is wrong");
+    super("Phone number or password  wrong");
 
     this.statusCode = 400;
   }
@@ -22,17 +30,9 @@ class UserNotFound extends Error {
   }
 }
 
-class UserIdMustBeRequired extends Error {
-  constructor() {
-    super("User ID must be required");
-
-    this.statusCode = 400;
-  }
-}
-
 module.exports = {
   UserBadRequestException,
   LoginOrPassWrongException,
   UserNotFound,
-  UserIdMustBeRequired
+  UserPhoneAlreadyExists,
 };

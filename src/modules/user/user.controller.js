@@ -1,10 +1,6 @@
 const { ResData } = require("../../library/resData");
-const {
-  UserBadRequestException,
-  UserNotFound,
-} = require("./exception/user.exception");
+const { UserBadRequestException } = require("./exception/user.exception");
 const { userScheme } = require("./validation/user.validation");
-// const {  } = require("./validation/user.validation");
 
 class UserController {
   #userService;
@@ -41,6 +37,25 @@ class UserController {
       }
 
       const resData = await this.#userService.registerForAdmin(dto);
+      res.status(resData.statusCode).json(resData);
+    } catch (error) {
+      const resData = new ResData(error.message, error.statusCode || 500);
+      res.status(resData.statusCode).json(resData);
+    }
+  }
+
+  async login(req, res) {
+    try {
+      const dto = req.body;
+
+      const validated = userScheme.validate(dto);
+
+      if (validated.error) {
+        throw new UserBadRequestException(validated.error.message);
+      }
+
+      const resData = await this.#userService.login(dto);
+
       res.status(resData.statusCode).json(resData);
     } catch (error) {
       const resData = new ResData(error.message, error.statusCode || 500);
@@ -107,7 +122,6 @@ class UserController {
       res.status(resData.statusCode).json(resData);
     }
   }
-
 }
 
 module.exports = { UserController };

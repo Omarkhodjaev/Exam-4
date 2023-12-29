@@ -2,21 +2,27 @@ const { ResData } = require("../../library/resData");
 const path = require("path");
 const { DataSource } = require("../../library/dataSource.js");
 const User = require("./entity/user.entity.js");
-const { UserNotFound } = require("./exception/user.exception");
+const {
+  UserNotFound,
+  UserPhoneAlreadyExists,
+  LoginOrPassWrongException,
+} = require("./exception/user.exception");
 const uuid = require("uuid");
 const { hashed, isValid } = require("../../library/bycript.js");
 const { jwtSign } = require("../../library/jwt.js");
-const {userFindById} = require("../../library/userFoundById.js");
-
+const { userFindById } = require("../../library/userFoundById.js");
 
 class UserService {
-
   async register(dto) {
-  
     const userPath = path.join(__dirname, "../../../database", "users.json");
     const usersDataSource = new DataSource(userPath);
     const users = usersDataSource.read();
 
+    const foundUserByPhone = await this.#_findUserByPhone(dto.phone);
+
+    if (foundUserByPhone) {
+      throw new UserPhoneAlreadyExists();
+    }
 
     const hashedPassword = await hashed(dto.password);
 
@@ -28,7 +34,6 @@ class UserService {
       hashedPassword,
       dto.fullName
     );
-
 
     users.push(newUser);
     usersDataSource.write(users);
@@ -44,11 +49,15 @@ class UserService {
   }
 
   async registerForAdmin(dto) {
-  
     const userPath = path.join(__dirname, "../../../database", "users.json");
     const usersDataSource = new DataSource(userPath);
     const users = usersDataSource.read();
 
+    const foundUserByPhone = await this.#_findUserByPhone(dto.phone);
+
+    if (foundUserByPhone) {
+      throw new UserPhoneAlreadyExists();
+    }
 
     const hashedPassword = await hashed(dto.password);
 
@@ -59,11 +68,9 @@ class UserService {
       dto.phone,
       hashedPassword,
       dto.fullName,
-      "admin",
-    );+
-
-
-    users.push(newUser);
+      "admin"
+    );
+    +users.push(newUser);
     usersDataSource.write(users);
 
     const newToken = jwtSign(newUser.id);
@@ -76,6 +83,28 @@ class UserService {
     return resData;
   }
 
+  async login(dto) {
+    const foundUser = this.#_findUserByPhone(dto.phone);
+
+    if (!foundUser) {
+      throw new LoginOrPassWrongException();
+    }
+
+    const isValidPassword = await isValid(dto.password, foundUser.password);
+
+    if (!isValidPassword) {
+      throw new LoginOrPassWrongException();
+    }
+
+    const newToken = jwtSign(foundUser.id);
+
+    const resData = new ResData("Successfully logged in", 200, {
+      user: foundUser,
+      token: newToken,
+    });
+
+    return resData;
+  }
 
   getAllUsers() {
     const userPath = path.join(__dirname, "../../../database", "users.json");
@@ -87,14 +116,18 @@ class UserService {
   }
 
   getUserById(userId) {
-
-    const foundUserById = userFindById(userId)
+    const foundUserById = userFindById(userId);
 
     if (!foundUserById) {
       throw new UserNotFound();
     }
 
-    const resData = new ResData("User is taken by ID", 200, foundUserById, userId);
+    const resData = new ResData(
+      "User is taken by ID",
+      200,
+      foundUserById,
+      userId
+    );
     return resData;
   }
 
@@ -118,6 +151,11 @@ class UserService {
 
     const hashedPassword = await hashed(dto.password);
 
+    const foundUserByPhone = this.#_findUserByPhone(dto.phone);
+    if (foundUserByPhone) {
+      throw new UserPhoneAlreadyExists();
+    }
+
     foundUser.password = hashedPassword;
     foundUser.full_name = dto.fullName;
     foundUser.phone = dto.phone;
@@ -133,6 +171,15 @@ class UserService {
 
     const resData = new ResData("User updated", 200, foundUser);
     return resData;
+  }
+
+  #_findUserByPhone(phone) {
+    const userPath = path.join(__dirname, "../../../database", "users.json");
+    const usersDataSource = new DataSource(userPath);
+    const users = usersDataSource.read();
+
+    const foundUserByPhone = users.find((user) => user.phone === phone);
+    return foundUserByPhone;
   }
 }
 

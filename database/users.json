@@ -1,16 +1,23 @@
 [
-  {
-    "id": "04ce551c-e698-4e80-ac92-47c970e11469",
-    "phone": 910130324,
-    "password": "$2b$10$VoA8/yctQMpeoPQZ2uvTLO.DoQgbCJZi12RsZH67yCO2g7N9mSfsW",
-    "full_name": "Test",
-    "role": "admin"
-  },
-  {
-    "id": "9c10426a-4d24-48d0-8765-e05cbb226d71",
-    "phone": 910130324,
-    "password": "$2b$10$OLm3fCAtPQR4jV3BWJMF4eR3gkUBdbj3W1mVCks3zxsaGNOB5jV3y",
-    "full_name": "Test",
-    "role": "user"
-  }
+    {
+        "id": "04ce551c-e698-4e80-ac92-47c970e11469",
+        "phone": 910130324,
+        "password": "$2b$10$VoA8/yctQMpeoPQZ2uvTLO.DoQgbCJZi12RsZH67yCO2g7N9mSfsW",
+        "full_name": "Test",
+        "role": "admin"
+    },
+    {
+        "id": "9702e827-6103-4a17-a43b-6e998f08048e",
+        "phone": 910130325,
+        "password": "$2b$10$5IwqmIwUZLIizdazwf7yxO2FHcwo8GArAMQdG6ly9r7wFw/837fK.",
+        "full_name": "Test",
+        "role": "admin"
+    },
+    {
+        "id": "717298e2-af68-4a7e-8dd3-5effc7d9c353",
+        "phone": 910130326,
+        "password": "$2b$10$631360zoHnUEUifCajCtXOYIerc6qfR3jWR3Liv1DheE/zxYhToVe",
+        "full_name": "Test",
+        "role": "user"
+    }
 ]

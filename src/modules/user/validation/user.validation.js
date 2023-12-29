@@ -6,6 +6,4 @@ const userScheme = joi.object({
   fullName: joi.string().required(),
 });
 
-
-
 module.exports = { userScheme };

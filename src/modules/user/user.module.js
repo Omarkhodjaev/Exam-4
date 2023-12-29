@@ -9,28 +9,44 @@ const userService = new UserService();
 const userController = new UserController(userService);
 const authorizationMiddleware = new AuthorizationMiddleware();
 
+router.post(
+  "/signup-admin",
+  authorizationMiddleware.checkUser,
+  authorizationMiddleware.adminRole,
+  (req, res) => {
+    userController.registerForAdmin(req, res);
+  }
+);
 
-router.post("/admin", authorizationMiddleware.checkUser, authorizationMiddleware.adminRole, (req, res) => {
-  userController.registerForAdmin(req, res);
-});
-
-router.post("/",  (req, res) => {
+router.post("/signup-user", (req, res) => {
   userController.register(req, res);
 });
 
-
-
-router.get("/allusers", (req, res) => {
-  userController.getAllUsers(req, res);
+router.post("/login", (req, res) => {
+  userController.login(req, res);
 });
+
+router.get(
+  "/allusers",
+  authorizationMiddleware.checkUser,
+  authorizationMiddleware.adminRole,
+  (req, res) => {
+    userController.getAllUsers(req, res);
+  }
+);
 
 router.get("/:id", (req, res) => {
   userController.getUser(req, res);
 });
 
-router.delete("/:id", (req, res) => {
-  userController.deleteUser(req, res);
-});
+router.delete(
+  "/:id",
+  authorizationMiddleware.checkUser,
+  authorizationMiddleware.adminRole,
+  (req, res) => {
+    userController.deleteUser(req, res);
+  }
+);
 
 router.put("/:id", (req, res) => {
   userController.updateUser(req, res);
