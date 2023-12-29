@@ -4,8 +4,8 @@ const { userScheme } = require("./validation/user.validation");
 
 class UserController {
   #userService;
-  constructor(userService) {
-    this.#userService = userService;
+  constructor(UserService) {
+    this.#userService = UserService;
   }
 
   async register(req, res) {
