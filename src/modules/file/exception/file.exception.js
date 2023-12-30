@@ -6,4 +6,12 @@ class FileNotFound extends Error {
   }
 }
 
-module.exports = { FileNotFound };
+class FileBadRequestException extends Error {
+  constructor(message) {
+    super(message);
+
+    this.statusCode = 400;
+  }
+}
+
+module.exports = { FileNotFound, FileBadRequestException };

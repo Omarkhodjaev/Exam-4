@@ -1,4 +1,6 @@
 const { ResData } = require("../../library/resData");
+const { FileBadRequestException } = require("./exception/file.exception");
+const { fileScheme } = require("./validation/file.validation");
 
 class FileController {
   #fileService;
@@ -6,11 +8,18 @@ class FileController {
     this.#fileService = FileService;
   }
 
-  async singleUpload(req, res) {
+  async create(req, res) {
     try {
       const file = req.file;
+      const dto = req.body;
 
-      const resData = await this.#fileService.singleUpload(file);
+      const validated = fileScheme.validate(dto);
+
+      if (validated.error) {
+        throw new FileBadRequestException(validated.error.message);
+      }
+
+      const resData = await this.#fileService.singleUpload(file, dto);
       res.status(resData.statusCode).json(resData);
     } catch (error) {
       const resData = new ResData(error.message, error.statusCode || 500);
@@ -35,7 +44,7 @@ class FileController {
     res.status(resData.statusCode).json(resData);
   }
 
-  async deleteUser(req, res) {
+  async delete(req, res) {
     try {
       const fileId = req.params.id;
 

@@ -7,13 +7,12 @@ const { File } = require("./entity/file.entity");
 const { FileNotFound } = require("./exception/file.exception");
 
 class FileService {
-  singleUpload(file) {
+  singleUpload(file, dto) {
     const filePath = path.join(__dirname, "../../../database", "files.json");
     const fileDatasource = new DataSource(filePath);
     const files = fileDatasource.read();
 
-    const fileName = file.filename;
-
+    const fileName = dto.filename;
     const fileURL = fileServerUrl + fileName;
 
     const id = uuid.v4();
@@ -22,7 +21,7 @@ class FileService {
       id,
       fileURL,
       file.mimetype,
-      file.originalname,
+      dto.originalName,
       file.size
     );
 

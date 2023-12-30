@@ -10,8 +10,8 @@ const authorizationMiddleware = new AuthorizationMiddleware();
 
 const router = Router();
 
-router.post("/single-upload", upload.single("media"), (req, res) => {
-  fileController.singleUpload(req, res);
+router.post("/create", upload.single("media"), (req, res) => {
+  fileController.create(req, res);
 });
 
 router.get(
@@ -32,7 +32,7 @@ router.delete(
   authorizationMiddleware.checkUser,
   authorizationMiddleware.adminRole,
   (req, res) => {
-    fileController.deleteUser(req, res);
+    fileController.delete(req, res);
   }
 );
 
