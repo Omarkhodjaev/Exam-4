@@ -6,11 +6,11 @@ const {
   UserNotFound,
   UserPhoneAlreadyExists,
   LoginOrPassWrongException,
-} = require("./exception/user.exception.js");
+} = require("./exception/user.exception");
 const uuid = require("uuid");
 const { hashed, isValid } = require("../../library/bycript.js");
 const { jwtSign } = require("../../library/jwt.js");
-const { userFindById } = require("../../library/userFoundById.js");
+const { userFindById } = require("../../library/userFindById.js");
 
 class UserService {
   async register(dto) {

@@ -5,5 +5,12 @@
         "mime_type": "image/jpeg",
         "original_name": "amr-taha-SMMqej67qjI-unsplash.jpg",
         "size": 2255454
+    },
+    {
+        "id": "81be5055-7535-4fa9-93c7-122ef5dff032",
+        "path": "http://localhost:3000/media-1703958685476-786025196.jpg",
+        "mime_type": "image/jpeg",
+        "original_name": "amr-taha-SMMqej67qjI-unsplash.jpg",
+        "size": 2255454
     }
 ]

@@ -1,14 +1,13 @@
 const { verifyToken } = require("./jwt.js");
 const { ResData } = require("./resData.js");
-const { userFindById } = require("./userFoundById.js");
+const { userFindById } = require("./userFindById.js");
 
 class AuthorizationMiddleware {
   adminRole(req, res, next) {
     const userId = req.userId;
-    console.log(userId);
-    console.log(userId);
+
     const foundUser = userFindById(userId);
-    
+
     if (foundUser && foundUser.role === "admin") {
       req.userId = foundUser;
       return next();
@@ -43,7 +42,6 @@ class AuthorizationMiddleware {
       req.userId = userId;
       next();
     } catch (error) {
-      console.log(error);
       const resData = new ResData("Invalid token", 401);
       res.status(resData.statusCode).json(resData);
     }
