@@ -13,4 +13,4 @@ const productEditScheme = joi.object({
   description: joi.string().required(),
 });
 
-module.exports = { productScheme,productEditScheme };
+module.exports = { productScheme, productEditScheme };

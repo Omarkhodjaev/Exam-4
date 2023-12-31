@@ -22,4 +22,12 @@ class NotFoundByProductId extends Error {
   }
 }
 
-module.exports = { UserProductBadRequestException, NotFoundByUserId ,NotFoundByProductId};
+class NotFoundById extends Error {
+  constructor() {
+    super("User product not found by Id ");
+
+    this.statusCode = 404;
+  }
+}
+
+module.exports = { UserProductBadRequestException, NotFoundByUserId ,NotFoundByProductId,NotFoundById};

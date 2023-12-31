@@ -9,6 +9,7 @@ const { error } = require("console");
 const {
   NotFoundByUserId,
   NotFoundByProductId,
+  NotFoundById,
 } = require("./exception/user-product.exception");
 
 class UserProductService {
@@ -101,22 +102,61 @@ class UserProductService {
   }
 
   delete(userProductId) {
-    const foundUserProduct = findProductById(userProductId);
-
     const userProductPath = path.join(
       __dirname,
       "../../../database",
-      "products.json"
+      "user-products.json"
     );
     const userProductDataSource = new DataSource(userProductPath);
     const userProducts = userProductDataSource.read();
+
+    const foundUserProduct = userProducts.find(
+      (userProduct) => userProduct.id === userProductId
+    );
+
+    if (!foundUserProduct) {
+      throw new NotFoundById();
+    }
+
     const filterUserProducts = userProducts.filter(
-      (userProduct) => userProduct.id !== foundUserProduct.id
+      (userProduct) => userProduct.id !== userProductId
     );
 
     userProductDataSource.write(filterUserProducts);
+    foundUserProduct.total_price = foundUserProduct.total_price / 100;
 
     const resData = new ResData("User product deleted", 200, foundUserProduct);
+    return resData;
+  }
+
+  update(dto, userProductId) {
+    const userProductPath = path.join(
+      __dirname,
+      "../../../database",
+      "user-products.json"
+    );
+    const userProductDataSource = new DataSource(userProductPath);
+    const userProducts = userProductDataSource.read();
+
+    const foundUserProduct = userProducts.find(
+      (userProduct) => userProduct.id === userProductId
+    );
+
+    if (!foundUserProduct) {
+      throw new NotFoundByProductId();
+    }
+
+    foundUserProduct.count = dto.count;
+    foundUserProduct.status = dto.status;
+
+    const filterUserProduct = userProducts.filter(
+      (user) => user.id !== foundUserProduct.id
+    );
+
+    filterUserProduct.push(foundUserProduct);
+    userProductDataSource.write(filterUserProduct);
+
+    const resData = new ResData("User updated", 200, foundUserProduct);
     return resData;
   }
 }

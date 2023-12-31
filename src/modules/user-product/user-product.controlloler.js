@@ -2,7 +2,10 @@ const { ResData } = require("../../library/resData");
 const {
   UserProductBadRequestException,
 } = require("./exception/user-product.exception");
-const { userProductScheme } = require("./validation/user-product.validation");
+const {
+  userProductScheme,
+  userProductUpdateScheme,
+} = require("./validation/user-product.validation");
 
 class UserProductController {
   #userProductService;
@@ -74,6 +77,29 @@ class UserProductController {
         error.message || "Server error",
         error.statusCode || 500
       );
+      res.status(resData.statusCode).json(resData);
+    }
+  }
+
+  async update(req, res) {
+    try {
+      const dto = req.body;
+
+     
+      const userProductId = req.params.id;
+
+      dto.count = Number(dto.count);
+
+      const validated = userProductUpdateScheme.validate(dto);
+
+      if (validated.error) {
+        throw new UserProductBadRequestException(validated.error.message);
+      }
+
+      const resData = await this.#userProductService.update(dto, userProductId);
+      res.status(resData.statusCode).json(resData);
+    } catch (error) {
+      const resData = new ResData(error.message, error.statusCode);
       res.status(resData.statusCode).json(resData);
     }
   }

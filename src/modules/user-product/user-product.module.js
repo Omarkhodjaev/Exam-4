@@ -13,7 +13,7 @@ const authorizationMiddleware = new AuthorizationMiddleware();
 router.post(
   "/",
   authorizationMiddleware.checkUser,
-  authorizationMiddleware.adminRole,
+  authorizationMiddleware.userRole,
   (req, res) => {
     userProductController.create(req, res);
   }
@@ -27,8 +27,17 @@ router.get("/byproduct/:id", (req, res) => {
   userProductController.getByProductId(req, res);
 });
 
-router.delete("/:id", (req, res) => {
-  userProductController.delete(req, res);
+router.delete(
+  "/:id",
+  authorizationMiddleware.checkUser,
+  authorizationMiddleware.adminRole,
+  (req, res) => {
+    userProductController.delete(req, res);
+  }
+);
+
+router.put("/:id", (req, res) => {
+  userProductController.update(req, res);
 });
 
 module.exports = { router };
