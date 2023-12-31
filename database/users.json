@@ -19,5 +19,138 @@
         "password": "$2b$10$631360zoHnUEUifCajCtXOYIerc6qfR3jWR3Liv1DheE/zxYhToVe",
         "full_name": "Test",
         "role": "user"
+    },
+    {
+        "id": "d6236b79-9996-4902-9f40-c44a61230e37",
+        "phone": 11,
+        "password": "$2b$10$a3SFmIRXsHv3oh72B5nqUOXdpTO4Zkv09G68a9SBK4QFQJQNBcvQC",
+        "full_name": "Yangi",
+        "role": "user"
+    },
+    {
+        "id": "f211e177-d185-4779-98db-127819216669",
+        "phone": 111,
+        "password": "$2b$10$Y.yNLSdJiBmM2UF0YiRRXee5URHjIch2QmfNayN5d315cUWRyMjEe",
+        "full_name": "Yangi",
+        "role": "user"
+    },
+    {
+        "id": "d4478130-ae95-4efe-9c81-fc86cf152c14",
+        "phone": 1111,
+        "password": "$2b$10$hfD1uFDL1FoHlGHa6Q6Pvej4TtLAXfmnaIQCGZiKrc8A3RHP6gNUq",
+        "full_name": "Yangi",
+        "role": "user"
+    },
+    {
+        "id": "e24a7bd3-0d2d-4936-9a94-8472c4ddb154",
+        "phone": 11111,
+        "password": "$2b$10$DuJ8kFVcIVeHr5IE1bsxR.QxMxE.z3rQ/dTuDtjt1K3dVT5Yve6Ne",
+        "full_name": "Yangi",
+        "role": "user"
+    },
+    {
+        "id": "3737ef9a-8b1b-41fc-92f4-3443a3ffd1ed",
+        "phone": 2,
+        "password": "$2b$10$neq7zCNMjcOpv0sNwc5BgeDLIVGp3fjU/JqJ3uvGaRbUdWZt82wiW",
+        "full_name": "Yangi",
+        "role": "user"
+    },
+    {
+        "id": "b0a5c384-c068-4279-8090-1c25972636de",
+        "phone": 22,
+        "password": "$2b$10$zcFrwIRXO4vQABXIUxB6F.dYofDi6nHzDJ5OmZYcyNtAX4L4vat36",
+        "full_name": "Yangi",
+        "role": "user"
+    },
+    {
+        "id": "5322d675-e5b0-4c1f-8db1-f35fbd312ef2",
+        "phone": 222,
+        "password": "$2b$10$UjZtlX04pTFphpUw1nRThu1oILe/ILiSVZAPIsZjoEXeEobrCzAE2",
+        "full_name": "Yangi",
+        "role": "user"
+    },
+    {
+        "id": "6ca943ab-1b7c-4b76-a9a0-bb799566b410",
+        "phone": 2221,
+        "password": "$2b$10$uKcUTK/ibYWbVocJ49vmpO5XHmmdJmfKvZJz1uILMnVS75Vq/57CO",
+        "full_name": "Yangi",
+        "role": "user"
+    },
+    {
+        "id": "86d15a4f-427b-4dc4-a3fc-349ffa5c80b3",
+        "phone": 22212,
+        "password": "$2b$10$99mud4/XadYrEoBvhh4As.aR8Fntq7WFGwHDAZXup43ktFjPqzrD2",
+        "full_name": "Yangi",
+        "role": "user"
+    },
+    {
+        "id": "1b907cd0-9c6c-4dca-8454-edb85f59d633",
+        "phone": 3,
+        "password": "$2b$10$ZlvHJKs2IZCsDRzgWm5dZuocxQO9wsouiG.pfU5s9Ga0ZEVsRmhW.",
+        "full_name": "Yangi",
+        "role": "admin"
+    },
+    {
+        "id": "410d76cf-a426-454b-9037-9b7686bac142",
+        "phone": 5,
+        "password": "$2b$10$vhESL9wy6UAdLXNA3NRQrOicS4DEsD4H/ef7D8VY7E8IdVzMENT5m",
+        "full_name": "Yangi",
+        "role": "admin"
+    },
+    {
+        "id": "1020b8bc-9283-4e73-9897-5702c6d93935",
+        "phone": "5",
+        "password": "$2b$10$tCnpSa4V9EaSc/2ryMpMeukVMhLb4toiEhhiZb5NcyS5Sh.IylHgy",
+        "full_name": "Yangi",
+        "role": "admin"
+    },
+    {
+        "id": "dc872b2d-76ed-4537-bfcd-55f433dfb259",
+        "phone": "2",
+        "password": "$2b$10$C65IfAQbbuvxetxCRa4KmeUE51l4agPyjklTBkAKXx5UaLygY2kH.",
+        "full_name": "Yangi",
+        "role": "admin"
+    },
+    {
+        "id": "a7a9ff73-3f5d-4425-a770-eb09140aff3c",
+        "phone": "211",
+        "password": "$2b$10$zVlI80Qcl5.DH2tMcata4ufHesnS/uc6i7OPh8u4nC0Rqk6QOjK/W",
+        "full_name": "Yangi",
+        "role": "admin"
+    },
+    {
+        "id": "3e447902-57ac-4922-b954-9fd56ec32092",
+        "phone": "2111",
+        "password": "$2b$10$etc9Tc4BDIrIFonXuUaSXuTJThu7DFS0QuK5IrCRShN37Zf9rgIIW",
+        "full_name": "Yangi",
+        "role": "admin"
+    },
+    {
+        "id": "fb5bdb39-360b-4ef1-b68e-5292993a41ea",
+        "phone": 2111,
+        "password": "$2b$10$/PnclhZd9Aslkslb6nLp/OWrJfQYoTlObVoVqgncIIOS7RC8KaqFW",
+        "full_name": "Yangi",
+        "role": "admin"
+    },
+    {
+        "id": "31ae6b8e-6329-416d-87e1-25a8761de812",
+        "phone": 211112,
+        "password": "$2b$10$9lH5VRvuJiKgZocOfuft0.J7WfNtISHrMTDMHoVeEWgQa7mO9rkfi",
+        "full_name": "Yangi",
+        "role": "admin"
+    },
+    {
+        "id": "76ad3ed2-0a49-44ff-bb40-001eb9ab23b6",
+        "phone": 222222222,
+        "password": "$2b$10$wWHUz2KpTe.sRHZSsq5wWuUO18kgJOlH1eSxsJ/eo6EFHhUsTVD06",
+        "full_name": "Yangi",
+        "role": "admin"
+    },
+    {
+        "id": "075c0dd1-8dc5-43f5-8563-a113e9775f81",
+        "phone": 992222222,
+        "password": "$2b$10$ebxwzv3VIO9fT2ocKL127ub.nbFc1.i61/7.2XDcq0xJteDL1Jtxi",
+        "full_name": "Yangi",
+        "role": "admin"
     }
 ]

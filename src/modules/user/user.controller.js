@@ -29,7 +29,7 @@ class UserController {
   async registerForAdmin(req, res) {
     try {
       const dto = req.body;
-
+      dto.phone = Number(dto.phone);
       const validated = userScheme.validate(dto);
 
       if (validated.error) {

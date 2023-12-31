@@ -10,7 +10,7 @@ const authorizationMiddleware = new AuthorizationMiddleware();
 
 const router = Router();
 
-router.post("/create", upload.single("media"), (req, res) => {
+router.post("/", upload.single("media"), (req, res) => {
   fileController.create(req, res);
 });
 
