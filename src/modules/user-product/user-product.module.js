@@ -19,4 +19,16 @@ router.post(
   }
 );
 
+router.get("/byuser/:id", (req, res) => {
+  userProductController.getByUserId(req, res);
+});
+
+router.get("/byproduct/:id", (req, res) => {
+  userProductController.getByProductId(req, res);
+});
+
+router.delete("/:id", (req, res) => {
+  userProductController.delete(req, res);
+});
+
 module.exports = { router };

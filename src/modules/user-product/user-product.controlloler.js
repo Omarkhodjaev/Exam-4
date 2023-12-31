@@ -15,7 +15,7 @@ class UserProductController {
       const dto = req.body;
       const userId = req.userId.id;
       dto.count = Number(dto.count);
-      
+
       const validated = userProductScheme.validate(dto);
       if (validated.error) {
         throw new UserProductBadRequestException(validated.error.message);
@@ -26,6 +26,52 @@ class UserProductController {
     } catch (error) {
       const resData = new ResData(
         error.message || "server error",
+        error.statusCode || 500
+      );
+      res.status(resData.statusCode).json(resData);
+    }
+  }
+
+  async getByUserId(req, res) {
+    try {
+      const userId = req.params.id;
+
+      const resData = await this.#userProductService.getByUserId(userId);
+      res.status(resData.statusCode).json(resData);
+    } catch (error) {
+      const resData = new ResData(
+        error.message || "server error",
+        error.statusCode || 500
+      );
+      res.status(resData.statusCode).json(resData);
+    }
+  }
+
+  async getByProductId(req, res) {
+    try {
+      const productId = req.params.id;
+
+      const resData = await this.#userProductService.getByProductId(productId);
+      res.status(resData.statusCode).json(resData);
+    } catch (error) {
+      const resData = new ResData(
+        error.message || "server error",
+        error.statusCode || 500
+      );
+      res.status(resData.statusCode).json(resData);
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const userProductId = req.params.id;
+
+      const resData = await this.#userProductService.delete(userProductId);
+
+      res.status(resData.statusCode).json(resData);
+    } catch (error) {
+      const resData = new ResData(
+        error.message || "Server error",
         error.statusCode || 500
       );
       res.status(resData.statusCode).json(resData);

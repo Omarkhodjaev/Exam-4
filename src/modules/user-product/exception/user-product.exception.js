@@ -6,4 +6,20 @@ class UserProductBadRequestException extends Error {
   }
 }
 
-module.exports = { UserProductBadRequestException };
+class NotFoundByUserId extends Error {
+  constructor() {
+    super("User product not found by user Id ");
+
+    this.statusCode = 404;
+  }
+}
+
+class NotFoundByProductId extends Error {
+  constructor() {
+    super("User product not found by product Id ");
+
+    this.statusCode = 404;
+  }
+}
+
+module.exports = { UserProductBadRequestException, NotFoundByUserId ,NotFoundByProductId};

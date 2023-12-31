@@ -1,38 +1,20 @@
 [
     {
-        "id": "4dba852d-2350-41b1-9158-d70f665cb344",
-        "user_id": "04ce551c-e698-4e80-ac92-47c970e11469",
-        "product_id": "63a89746-08c8-489d-8753-98a843a5a13a",
-        "count": 1,
-        "date": "2023-12-31 12:04:38",
-        "total_price": 10000,
-        "status": "pending"
-    },
-    {
-        "id": "6b69a632-ca78-416b-a1c0-646eee4ea2da",
+        "id": "22507019-c0da-4a98-84bb-cb67f1aead2b",
         "user_id": "04ce551c-e698-4e80-ac92-47c970e11469",
         "product_id": "63a89746-08c8-489d-8753-98a843a5a13a",
         "count": 2,
-        "date": "2023-12-31 12:04:50",
+        "date": "2023-12-31 17:22:15",
         "total_price": 20000,
         "status": "pending"
     },
     {
-        "id": "66810999-49e2-4b68-bcd1-cb1f87d8493c",
-        "user_id": "04ce551c-e698-4e80-ac92-47c970e11469",
-        "product_id": "63a89746-08c8-489d-8753-98a843a5a13a",
-        "count": 1,
-        "date": "2023-12-31 12:06:56",
-        "total_price": 100,
-        "status": "pending"
-    },
-    {
-        "id": "8f93b9f7-d8a6-452f-9025-6c572bedb29f",
+        "id": "562757b0-a113-485e-b6ab-d5944636b594",
         "user_id": "04ce551c-e698-4e80-ac92-47c970e11469",
         "product_id": "63a89746-08c8-489d-8753-98a843a5a13a",
         "count": 2,
-        "date": "2023-12-31 12:07:04",
-        "total_price": 200,
+        "date": "2023-12-31 17:24:03",
+        "total_price": 20000,
         "status": "pending"
     }
 ]
