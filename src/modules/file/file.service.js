@@ -5,6 +5,7 @@ const { fileServerUrl } = require("../../config");
 const { DataSource } = require("../../library/dataSource");
 const { File } = require("./entity/file.entity");
 const { FileNotFound } = require("./exception/file.exception");
+const fs = require("fs");
 
 class FileService {
   singleUpload(file, dto) {
@@ -12,7 +13,7 @@ class FileService {
     const fileDatasource = new DataSource(filePath);
     const files = fileDatasource.read();
 
-    const fileName = dto.filename;
+    const fileName = file.filename;
     const fileURL = fileServerUrl + fileName;
 
     const id = uuid.v4();
@@ -66,12 +67,24 @@ class FileService {
     const userDataSource = new DataSource(userPath);
     const users = userDataSource.read();
 
-    const filterUsers = users.filter((user) => user.id !== foundFile.id);
+    const filename = path.basename(foundFile.path);
 
-    userDataSource.write(filterUsers);
+    const filePath = path.join(__dirname, "../../../uploads", filename);
 
-    const resData = new ResData("File deleted", 200, foundFile);
-    return resData;
+    if (fs.existsSync(filePath)) {
+      // Delete the file
+      fs.unlinkSync(filePath);
+
+      const filterUsers = users.filter((user) => user.id !== foundFile.id);
+
+      userDataSource.write(filterUsers);
+
+      const resData = new ResData("File deleted", 200, foundFile);
+      return resData;
+    } else {
+      const resData = new ResData("File couldn't delete", 200, foundFile);
+      return resData;
+    }
   }
 }
 

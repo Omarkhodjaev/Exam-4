@@ -1,72 +1,9 @@
 [
     {
-        "id": "c0ddd974-014c-47cd-9e9c-3fe0158740ba",
-        "path": "http://localhost:3000/media-1703862720503-848455779.jpg",
-        "mime_type": "image/jpeg",
-        "original_name": "amr-taha-SMMqej67qjI-unsplash.jpg",
-        "size": 2255454
-    },
-    {
-        "id": "81be5055-7535-4fa9-93c7-122ef5dff032",
-        "path": "http://localhost:3000/media-1703958685476-786025196.jpg",
-        "mime_type": "image/jpeg",
-        "original_name": "amr-taha-SMMqej67qjI-unsplash.jpg",
-        "size": 2255454
-    },
-    {
-        "id": "7fc5469e-6f01-478a-ac51-f67828aaf679",
-        "path": "http://localhost:3000/undefined",
-        "mime_type": "image/jpeg",
-        "original_name": "{\"nomi\"}",
-        "size": 2255454
-    },
-    {
-        "id": "080c80c0-d665-44b8-a6fb-1b8d9568a609",
-        "path": "http://localhost:3000/undefined",
-        "mime_type": "image/jpeg",
-        "original_name": "{\"nomi\"}",
-        "size": 2255454
-    },
-    {
-        "id": "970534e3-b709-4d2b-93ca-b04ae66816eb",
-        "path": "http://localhost:3000/undefined",
-        "mime_type": "image/jpeg",
-        "original_name": "{\"nomi\"}",
-        "size": 2255454
-    },
-    {
-        "id": "9e3365ca-85f9-44d1-96bb-db141ed5db83",
-        "path": "http://localhost:3000/undefined",
-        "mime_type": "image/jpeg",
-        "original_name": "{\"nomi\"}",
-        "size": 2255454
-    },
-    {
-        "id": "19005ed0-9d27-4f21-ae26-7554109dd780",
-        "path": "http://localhost:3000/undefined",
-        "mime_type": "image/jpeg",
-        "original_name": "nomi",
-        "size": 2255454
-    },
-    {
-        "id": "3cd16d9c-660a-459c-946b-c668c47bdb7c",
-        "path": "http://localhost:3000/undefined",
-        "mime_type": "image/jpeg",
-        "original_name": "nomi",
-        "size": 2255454
-    },
-    {
-        "id": "d89e0a5b-9b7b-46d1-8948-c2c5e3788f91",
-        "path": "http://localhost:3000/undefined",
+        "id": "0aaa2514-42e3-4fdb-a071-0a25f0f6f005",
+        "path": "http://localhost:3000/1704113673531-488639389.jpg",
         "mime_type": "image/jpeg",
         "original_name": "yanginom",
-        "size": 2255454
-    },
-    {
-        "id": "dc26a254-0ff5-4496-9ca1-b9d7e73536fb",
-        "path": "http://localhost:3000/undefined",
-        "mime_type": "image/jpeg",
-        "original_name": "yanginom1",
         "size": 2255454
     }
 ]

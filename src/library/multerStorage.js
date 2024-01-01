@@ -11,8 +11,8 @@ const storage = multer.diskStorage({
       "-" +
       Math.round(Math.random() * 1e9) +
       path.extname(file.originalname);
-      cb(null, file.fieldname + "-" + uniqueSuffix);
-      file.filename = file.fieldname + "-" + uniqueSuffix;
+      cb(null, uniqueSuffix);
+  
   },
 });
 
