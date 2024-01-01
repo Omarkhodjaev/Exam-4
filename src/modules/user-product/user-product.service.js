@@ -5,7 +5,7 @@ const path = require("path");
 const { UserProduct } = require("./entity/user-product.entity");
 const { dateGenerator } = require("../../library/dateGenerator");
 const { ResData } = require("../../library/resData");
-const { error } = require("console");
+
 const {
   NotFoundByUserId,
   NotFoundByProductId,
@@ -36,6 +36,7 @@ class UserProductService {
       foundProudctById.price * dto.count,
       "pending"
     );
+
     userProducts.push(newUserProduct);
     userProductDataSource.write(userProducts);
 

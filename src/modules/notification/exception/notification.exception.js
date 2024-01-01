@@ -1,4 +1,4 @@
-class UserProductBadRequestException extends Error {
+class NotificationBadRequest extends Error {
   constructor(message) {
     super(message);
 
@@ -24,10 +24,15 @@ class NotFoundByProductId extends Error {
 
 class NotFoundById extends Error {
   constructor() {
-    super("User product not found by Id ");
+    super("Notification not found by Id ");
 
     this.statusCode = 404;
   }
 }
 
-module.exports = { UserProductBadRequestException, NotFoundByUserId ,NotFoundByProductId,NotFoundById};
+module.exports = {
+  NotificationBadRequest,
+  NotFoundByUserId,
+  NotFoundByProductId,
+  NotFoundById,
+};
