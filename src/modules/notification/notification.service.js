@@ -122,6 +122,33 @@ class NotificationService {
     const resData = new ResData("Notification deleted", 200, foundNotification);
     return resData;
   }
+
+  async update(dto, id) {
+    const { data: foundNotification } = this.getById(id);
+
+    foundNotification.title = dto.title;
+    foundNotification.description = dto.description;
+    foundNotification.is_read = dto.isRead;
+
+    const notificationPath = path.join(
+      __dirname,
+      "../../../database",
+      "notifications.json"
+    );
+
+    const notificationDataSource = new DataSource(notificationPath);
+    const notifications = notificationDataSource.read();
+
+    const filterNotifications = notifications.filter(
+      (n) => n.id !== foundNotification.id
+    );
+
+    filterNotifications.push(foundNotification);
+    notificationDataSource.write(filterNotifications);
+
+    const resData = new ResData("Notification updated", 200, foundNotification);
+    return resData;
+  }
 }
 
 module.exports = { NotificationService };

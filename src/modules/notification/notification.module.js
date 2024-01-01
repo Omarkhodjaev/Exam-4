@@ -37,12 +37,20 @@ router.get(
 );
 
 router.delete(
-    "/:id",
-    authorizationMiddleware.checkUser,
-    authorizationMiddleware.adminRole,
-    (req, res) => {
-      notificationController.delete(req, res);
-    }
-  );
+  "/:id",
+  authorizationMiddleware.checkUser,
+  authorizationMiddleware.adminRole,
+  (req, res) => {
+    notificationController.delete(req, res);
+  }
+);
+
+router.put(
+  "/:id",
+
+  (req, res) => {
+    notificationController.update(req, res);
+  }
+);
 
 module.exports = { router };

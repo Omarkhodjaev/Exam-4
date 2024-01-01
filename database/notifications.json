@@ -1,38 +1,38 @@
 [
-  {
-    "id": "e8b0211b-b159-4e29-b717-73246ca0fb1e",
-    "title": "tEst",
-    "description": "test",
-    "is_read": false,
-    "date": "2024-01-01 15:17:16",
-    "user_id": "04ce551c-e698-4e80-ac92-47c970e11469",
-    "is_global": true
-  },
-  {
-    "id": "f88854fe-3fff-4c59-a892-bf2165e57ffd",
-    "title": "tEst",
-    "description": "test",
-    "is_read": false,
-    "date": "2024-01-01 15:17:37",
-    "user_id": "04ce551c-e698-4e80-ac92-47c970e11469",
-    "is_global": true
-  },
-  {
-    "id": "9b5cb85e-3d20-476a-82a5-18997cd95796",
-    "title": "tEst",
-    "description": "test",
-    "is_read": false,
-    "date": "2024-01-01 15:21:58",
-    "user_id": null,
-    "is_global": false
-  },
-  {
-    "id": "6218c71d-81ac-4273-938d-26cb60206a49",
-    "title": "tEst",
-    "description": "test",
-    "is_read": false,
-    "date": "2024-01-01 15:28:14",
-    "user_id": "04ce551c-e698-4e80-ac92-47c970e11469",
-    "is_global": true
-  }
+    {
+        "id": "e8b0211b-b159-4e29-b717-73246ca0fb1e",
+        "title": "tEst",
+        "description": "test",
+        "is_read": false,
+        "date": "2024-01-01 15:17:16",
+        "user_id": "04ce551c-e698-4e80-ac92-47c970e11469",
+        "is_global": true
+    },
+    {
+        "id": "f88854fe-3fff-4c59-a892-bf2165e57ffd",
+        "title": "tEst",
+        "description": "test",
+        "is_read": false,
+        "date": "2024-01-01 15:17:37",
+        "user_id": "04ce551c-e698-4e80-ac92-47c970e11469",
+        "is_global": true
+    },
+    {
+        "id": "9b5cb85e-3d20-476a-82a5-18997cd95796",
+        "title": "tEst",
+        "description": "test",
+        "is_read": false,
+        "date": "2024-01-01 15:21:58",
+        "user_id": null,
+        "is_global": false
+    },
+    {
+        "id": "6218c71d-81ac-4273-938d-26cb60206a49",
+        "title": "salom",
+        "description": "bu desc",
+        "date": "2024-01-01 15:28:14",
+        "user_id": "04ce551c-e698-4e80-ac92-47c970e11469",
+        "is_global": true,
+        "is_read": true
+    }
 ]

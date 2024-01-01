@@ -5,6 +5,9 @@ const notificationScheme = joi.object({
   description: joi.string().required(),
   userId: joi.string(),
   isGlobal: joi.boolean(),
+  isRead: joi.boolean().invalid(false),
 });
+
+
 
 module.exports = { notificationScheme };

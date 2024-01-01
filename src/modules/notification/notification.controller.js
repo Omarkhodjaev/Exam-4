@@ -67,6 +67,28 @@ class NotificationController {
       res.status(resData.statusCode).json(resData);
     }
   }
+
+  async update(req, res) {
+    try {
+      const id = req.params.id;
+      const dto = req.body;
+
+      const validated = notificationScheme.validate(dto);
+
+      if (validated.error) {
+        throw new NotificationBadRequest(validated.error.message);
+      }
+
+      const resData = await this.#notificationService.update(dto, id);
+      res.status(resData.statusCode).json(resData);
+    } catch (error) {
+      const resData = new ResData(
+        error.message || "server error",
+        error.statusCode || 500
+      );
+      res.status(resData.statusCode).json(resData);
+    }
+  }
 }
 
 module.exports = { NotificationController };
