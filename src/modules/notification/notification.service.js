@@ -12,7 +12,7 @@ class NotificationService {
     const notificationPath = path.join(
       __dirname,
       "../../../database",
-      "notification.json"
+      "notifications.json"
     );
 
     const notificationDataSource = new DataSource(notificationPath);
@@ -61,7 +61,7 @@ class NotificationService {
     const notificationPath = path.join(
       __dirname,
       "../../../database",
-      "notification.json"
+      "notifications.json"
     );
 
     const notificationDataSource = new DataSource(notificationPath);
@@ -87,7 +87,7 @@ class NotificationService {
     const notificationPath = path.join(
       __dirname,
       "../../../database",
-      "notification.json"
+      "notifications.json"
     );
 
     const notificationDataSource = new DataSource(notificationPath);
@@ -98,6 +98,28 @@ class NotificationService {
       200,
       notifications
     );
+    return resData;
+  }
+
+  delete(id) {
+    const { data: foundNotification } = this.getById(id);
+
+    const notificationPath = path.join(
+      __dirname,
+      "../../../database",
+      "notifications.json"
+    );
+
+    const notificationDataSource = new DataSource(notificationPath);
+    const notifications = notificationDataSource.read();
+
+    const filterNotifications = notifications.filter(
+      (user) => user.id !== foundNotification.id
+    );
+
+    notificationDataSource.write(filterNotifications);
+
+    const resData = new ResData("Notification deleted", 200, foundNotification);
     return resData;
   }
 }

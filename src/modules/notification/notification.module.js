@@ -36,4 +36,13 @@ router.get(
   }
 );
 
+router.delete(
+    "/:id",
+    authorizationMiddleware.checkUser,
+    authorizationMiddleware.adminRole,
+    (req, res) => {
+      notificationController.delete(req, res);
+    }
+  );
+
 module.exports = { router };

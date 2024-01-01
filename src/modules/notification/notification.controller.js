@@ -51,6 +51,22 @@ class NotificationController {
     const resData = await this.#notificationService.getAll();
     return res.status(resData.statusCode).json(resData);
   }
+
+  async delete(req, res) {
+    try {
+      const notificationId = req.params.id;
+
+      const resData = await this.#notificationService.delete(notificationId);
+
+      res.status(resData.statusCode).json(resData);
+    } catch (error) {
+      const resData = new ResData(
+        error.message || "Server error",
+        error.statusCode || 500
+      );
+      res.status(resData.statusCode).json(resData);
+    }
+  }
 }
 
 module.exports = { NotificationController };
