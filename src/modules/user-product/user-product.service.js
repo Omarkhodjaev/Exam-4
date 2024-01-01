@@ -149,6 +149,8 @@ class UserProductService {
     foundUserProduct.count = dto.count;
     foundUserProduct.status = dto.status;
 
+    foundUserProduct.total_price = foundUserProduct.total_price / 100;
+
     const filterUserProduct = userProducts.filter(
       (user) => user.id !== foundUserProduct.id
     );

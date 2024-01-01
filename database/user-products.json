@@ -23,7 +23,7 @@
         "product_id": "63a89746-08c8-489d-8753-98a843a5a13a",
         "count": 2,
         "date": "2023-12-31 17:41:48",
-        "total_price": 20000,
-        "status": "bought"
+        "total_price": 200,
+        "status": "cancelled"
     }
 ]
