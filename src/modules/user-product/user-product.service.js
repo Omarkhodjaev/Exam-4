@@ -143,21 +143,25 @@ class UserProductService {
     );
 
     if (!foundUserProduct) {
-      throw new NotFoundByProductId();
+      throw new NotFoundById();
     }
 
     foundUserProduct.count = dto.count;
     foundUserProduct.status = dto.status;
 
-    foundUserProduct.total_price = foundUserProduct.total_price / 100;
+    const foundProudctById = findProductById(foundUserProduct.product_id);
+
+    foundUserProduct.total_price =
+      foundUserProduct.count * foundProudctById.price;
 
     const filterUserProduct = userProducts.filter(
-      (user) => user.id !== foundUserProduct.id
+      (product) => product.id !== foundUserProduct.id
     );
 
     filterUserProduct.push(foundUserProduct);
     userProductDataSource.write(filterUserProduct);
-
+    foundUserProduct.total_price =
+      (foundUserProduct.count * foundProudctById.price) / 100;
     const resData = new ResData("User updated", 200, foundUserProduct);
     return resData;
   }

@@ -152,5 +152,12 @@
         "password": "$2b$10$ebxwzv3VIO9fT2ocKL127ub.nbFc1.i61/7.2XDcq0xJteDL1Jtxi",
         "full_name": "Yangi",
         "role": "admin"
+    },
+    {
+        "id": "29fa2dff-c0db-41ec-b60b-f9344ca63440",
+        "phone": "910130324",
+        "password": "$2b$10$kCOppCBrjEfI9xQ3.nG00.StoxyWMGM7aEMuFGKkjF9pm94N.MJHe",
+        "full_name": "user",
+        "role": "user"
     }
 ]
