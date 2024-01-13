@@ -139,9 +139,12 @@ class UserService {
       `
         UPDATE users
         SET password = $1, full_name = $2, phone = $3 
-        WHERE id = $4;
+        WHERE id = $4  returning *;
         `,
-      [hashedPassword, newFullName, newPhone, userId]
+      hashedPassword,
+      newFullName,
+      newPhone,
+      userId
     );
 
     const resData = new ResData("User updated", 200, updatedUser);

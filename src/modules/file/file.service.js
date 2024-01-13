@@ -1,9 +1,6 @@
-const uuid = require("uuid");
 const path = require("path");
 const { ResData } = require("../../library/resData");
 const { fileServerUrl } = require("../../config");
-const { DataSource } = require("../../library/dataSource");
-const { File } = require("./entity/file.entity");
 const { FileNotFound } = require("./exception/file.exception");
 const fs = require("fs");
 const { fetchAll, fetch } = require("../../library/pg.js");
