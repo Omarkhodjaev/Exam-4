@@ -11,8 +11,8 @@ const authorizationMiddleware = new AuthorizationMiddleware();
 
 router.post(
   "/signup-admin",
-  authorizationMiddleware.checkUser,
-  authorizationMiddleware.adminRole,
+  // authorizationMiddleware.checkUser,
+  // authorizationMiddleware.adminRole,
   (req, res) => {
     userController.registerForAdmin(req, res);
   }
@@ -28,8 +28,8 @@ router.post("/login", (req, res) => {
 
 router.get(
   "/allusers",
-  authorizationMiddleware.checkUser,
-  authorizationMiddleware.adminRole,
+  // authorizationMiddleware.checkUser,
+  // authorizationMiddleware.adminRole,
   (req, res) => {
     userController.getAllUsers(req, res);
   }
@@ -41,8 +41,8 @@ router.get("/:id", (req, res) => {
 
 router.delete(
   "/:id",
-  authorizationMiddleware.checkUser,
-  authorizationMiddleware.adminRole,
+  // authorizationMiddleware.checkUser,
+  // authorizationMiddleware.adminRole,
   (req, res) => {
     userController.deleteUser(req, res);
   }

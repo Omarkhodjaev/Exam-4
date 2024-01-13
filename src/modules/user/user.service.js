@@ -11,34 +11,21 @@ const uuid = require("uuid");
 const { hashed, isValid } = require("../../library/bycript.js");
 const { jwtSign } = require("../../library/jwt.js");
 const { userFindById } = require("../../library/userFindById.js");
+const { fetchAll, fetch } = require("../../library/pg.js");
 
 class UserService {
   async register(dto) {
-    const userPath = path.join(__dirname, "../../../database", "users.json");
-    const usersDataSource = new DataSource(userPath);
-    const users = usersDataSource.read();
-
-    const foundUserByPhone = await this.#_findUserByPhone(dto.phone);
-
-    if (foundUserByPhone) {
-      throw new UserPhoneAlreadyExists();
-    }
-
     const hashedPassword = await hashed(dto.password);
 
-    const generatedId = uuid.v4();
-
-    const newUser = new User(
-      generatedId,
+    const newUser = await fetchAll(
+      `INSERT INTO users (phone, password, full_name, role) VALUES ($1, $2, $3, $4) returning *`,
       dto.phone,
       hashedPassword,
-      dto.fullName
+      dto.fullName,
+      "user"
     );
 
-    users.push(newUser);
-    usersDataSource.write(users);
-
-    const newToken = jwtSign(newUser.id);
+    const newToken = jwtSign(newUser[0].id);
 
     const resData = new ResData("Successfully registered", 201, {
       user: newUser,
@@ -49,31 +36,17 @@ class UserService {
   }
 
   async registerForAdmin(dto) {
-    const userPath = path.join(__dirname, "../../../database", "users.json");
-    const usersDataSource = new DataSource(userPath);
-    const users = usersDataSource.read();
-
-    const foundUserByPhone = await this.#_findUserByPhone(dto.phone);
-
-    if (foundUserByPhone) {
-      throw new UserPhoneAlreadyExists();
-    }
-
     const hashedPassword = await hashed(dto.password);
 
-    const generatedId = uuid.v4();
-
-    const newUser = new User(
-      generatedId,
+    const newUser = await fetchAll(
+      `INSERT INTO users (phone, password, full_name, role) VALUES ($1, $2, $3, $4) returning *`,
       dto.phone,
       hashedPassword,
       dto.fullName,
       "admin"
     );
-    +users.push(newUser);
-    usersDataSource.write(users);
 
-    const newToken = jwtSign(newUser.id);
+    const newToken = jwtSign(newUser[0].id);
 
     const resData = new ResData("Successfully registered", 201, {
       user: newUser,
@@ -84,19 +57,21 @@ class UserService {
   }
 
   async login(dto) {
-    const foundUser = this.#_findUserByPhone(dto.phone);
+    const foundUser = await fetchAll(
+      `select * from users where phone = '${dto.phone}'`
+    );
 
-    if (!foundUser) {
+    if (foundUser.length == 0) {
       throw new LoginOrPassWrongException();
     }
 
-    const isValidPassword = await isValid(dto.password, foundUser.password);
+    const isValidPassword = await isValid(dto.password, foundUser[0].password);
 
     if (!isValidPassword) {
       throw new LoginOrPassWrongException();
     }
 
-    const newToken = jwtSign(foundUser.id);
+    const newToken = jwtSign(foundUser[0].id);
 
     const resData = new ResData("Successfully logged in", 200, {
       user: foundUser,
@@ -106,19 +81,19 @@ class UserService {
     return resData;
   }
 
-  getAllUsers() {
-    const userPath = path.join(__dirname, "../../../database", "users.json");
-    const userDataSource = new DataSource(userPath);
-    const users = userDataSource.read();
+  async getAllUsers() {
+    const users = await fetchAll(`select * from users`);
 
     const resData = new ResData("All users are taken", 200, { users });
     return resData;
   }
 
-  getUserById(userId) {
-    const foundUserById = userFindById(userId);
+  async getUserById(userId) {
+    const foundUserById = await fetchAll(
+      `select * from users where id = '${userId}'`
+    );
 
-    if (!foundUserById) {
+    if (!foundUserById.length) {
       throw new UserNotFound();
     }
 
@@ -131,45 +106,44 @@ class UserService {
     return resData;
   }
 
-  deleteUser(userId) {
-    const { data: foundUser } = this.getUserById(userId);
+  async deleteUser(userId) {
+  
+    const foundUser = await fetchAll(
+      `DELETE from users
+      WHERE id = '${userId}'
+      RETURNING *`
+    );
 
-    const userPath = path.join(__dirname, "../../../database", "users.json");
-    const userDataSource = new DataSource(userPath);
-    const users = userDataSource.read();
 
-    const filterUsers = users.filter((user) => user.id !== foundUser.id);
-
-    userDataSource.write(filterUsers);
-
+   
     const resData = new ResData("User deleted", 200, foundUser);
     return resData;
   }
 
   async updateUser(dto, userId) {
-    const { data: foundUser } = this.getUserById(userId);
+    const foundUser = await fetch(`
+    SELECT *
+    FROM users
+    WHERE id = '${userId}';`);
 
-    const hashedPassword = await hashed(dto.password);
-
-    const foundUserByPhone = this.#_findUserByPhone(dto.phone);
-    if (foundUserByPhone) {
-      throw new UserPhoneAlreadyExists();
+    if (foundUser.length == 0) {
+      throw new UserNotFound();
     }
 
-    foundUser.password = hashedPassword;
-    foundUser.full_name = dto.fullName;
-    foundUser.phone = dto.phone;
+    const hashedPassword = await hashed(dto.password);
+    const newFullName = dto.fullName;
+    const newPhone = dto.phone;
 
-    const userPath = path.join(__dirname, "../../../database", "users.json");
-    const userDataSource = new DataSource(userPath);
-    const users = userDataSource.read();
+    const updatedUser = await fetchAll(
+      `
+        UPDATE users
+        SET password = $1, full_name = $2, phone = $3 
+        WHERE id = $4;
+        `,
+      [hashedPassword, newFullName, newPhone, userId]
+    );
 
-    const filterUsers = users.filter((user) => user.id !== foundUser.id);
-
-    filterUsers.push(foundUser);
-    userDataSource.write(filterUsers);
-
-    const resData = new ResData("User updated", 200, foundUser);
+    const resData = new ResData("User updated", 200, updatedUser);
     return resData;
   }
 
