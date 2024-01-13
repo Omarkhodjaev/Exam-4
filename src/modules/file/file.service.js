@@ -6,30 +6,24 @@ const { DataSource } = require("../../library/dataSource");
 const { File } = require("./entity/file.entity");
 const { FileNotFound } = require("./exception/file.exception");
 const fs = require("fs");
+const { fetchAll, fetch } = require("../../library/pg.js");
 
 class FileService {
-  singleUpload(file, dto) {
-    const filePath = path.join(__dirname, "../../../database", "files.json");
-    const fileDatasource = new DataSource(filePath);
-    const files = fileDatasource.read();
-
+  async singleUpload(file, dto) {
     const fileName = file.filename;
+
     const fileURL = fileServerUrl + fileName;
 
-    const id = uuid.v4();
-
-    const newFile = new File(
-      id,
+    const newFile = await fetch(
+      `INSERT INTO files (path, mime_type, original_name, size)
+       VALUES ($1, $2, $3, $4) returning *`,
       fileURL,
       file.mimetype,
       dto.originalName,
       file.size
     );
 
-    files.push(newFile);
-    fileDatasource.write(files);
-
-    const resData = new ResData("Single file uploaded", 200, {
+    const resData = new ResData("A file uploaded", 200, {
       newFile,
       fileURL,
     });
@@ -37,12 +31,9 @@ class FileService {
     return resData;
   }
 
-  getById(fileId) {
-    const filePath = path.join(__dirname, "../../../database", "files.json");
-    const fileDatasource = new DataSource(filePath);
-    const files = fileDatasource.read();
+  async getById(fileId) {
+    const foundfile = await fetch(`SELECT * FROM files WHERE id = '${fileId}'`);
 
-    const foundfile = files.find((file) => file.id === fileId);
     if (!foundfile) {
       throw new FileNotFound();
     }
@@ -51,21 +42,23 @@ class FileService {
     return resData;
   }
 
-  getAll() {
-    const filePath = path.join(__dirname, "../../../database", "files.json");
-    const fileDatasource = new DataSource(filePath);
-    const files = fileDatasource.read();
+  async getAll() {
+    const files = await fetchAll(`SELECT * FROM files`);
 
     const resData = new ResData("All files taken", 200, files);
     return resData;
   }
 
-  deleteUser(fileId) {
-    const { data: foundFile } = this.getById(fileId);
+  async deleteUser(fileId) {
+    const foundFile = await fetch(
+      `DELETE from files
+      WHERE id = '${fileId}'
+      RETURNING *`
+    );
 
-    const userPath = path.join(__dirname, "../../../database", "files.json");
-    const userDataSource = new DataSource(userPath);
-    const users = userDataSource.read();
+    if (!foundFile) {
+      throw new FileNotFound();
+    }
 
     const filename = path.basename(foundFile.path);
 
@@ -74,10 +67,6 @@ class FileService {
     if (fs.existsSync(filePath)) {
       // Delete the file
       fs.unlinkSync(filePath);
-
-      const filterUsers = users.filter((user) => user.id !== foundFile.id);
-
-      userDataSource.write(filterUsers);
 
       const resData = new ResData("File deleted", 200, foundFile);
       return resData;

@@ -89,11 +89,11 @@ class UserService {
   }
 
   async getUserById(userId) {
-    const foundUserById = await fetchAll(
+    const foundUserById = await fetch(
       `select * from users where id = '${userId}'`
     );
 
-    if (!foundUserById.length) {
+    if (!foundUserById) {
       throw new UserNotFound();
     }
 
@@ -107,15 +107,16 @@ class UserService {
   }
 
   async deleteUser(userId) {
-  
-    const foundUser = await fetchAll(
+    const foundUser = await fetch(
       `DELETE from users
       WHERE id = '${userId}'
       RETURNING *`
     );
 
+    if (!foundUser) {
+      throw new UserNotFound();
+    }
 
-   
     const resData = new ResData("User deleted", 200, foundUser);
     return resData;
   }
@@ -145,15 +146,6 @@ class UserService {
 
     const resData = new ResData("User updated", 200, updatedUser);
     return resData;
-  }
-
-  #_findUserByPhone(phone) {
-    const userPath = path.join(__dirname, "../../../database", "users.json");
-    const usersDataSource = new DataSource(userPath);
-    const users = usersDataSource.read();
-
-    const foundUserByPhone = users.find((user) => user.phone === phone);
-    return foundUserByPhone;
   }
 }
 

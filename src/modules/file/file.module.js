@@ -16,8 +16,8 @@ router.post("/", upload.single("media"), (req, res) => {
 
 router.get(
   "/allfiles",
-  authorizationMiddleware.checkUser,
-  authorizationMiddleware.adminRole,
+  // authorizationMiddleware.checkUser,
+  // authorizationMiddleware.adminRole,
   (req, res) => {
     fileController.getAll(req, res);
   }
@@ -29,8 +29,8 @@ router.get("/:id", (req, res) => {
 
 router.delete(
   "/:id",
-  authorizationMiddleware.checkUser,
-  authorizationMiddleware.adminRole,
+  // authorizationMiddleware.checkUser,
+  // authorizationMiddleware.adminRole,
   (req, res) => {
     fileController.delete(req, res);
   }
